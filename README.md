@@ -59,15 +59,15 @@ Images are stored as `{split}/{ID}.jpg`, and the annotation files are JSON array
 | `Artistic conception` | string | Overall aesthetic impression, emotional orientation, and thematic meaning conveyed by the painting. |
 | `Reference Poetry` | string | Reference poem, available in `test.json` only. |
 
-The `dynasty` values appear in Chinese and include some variants, e.g. `宋` / `南宋`, `元` / `金`, `明` / `明朝`, `清`, and `近现代` / `现代` / `民国`. For the five-period statistics reported in the paper, variants are grouped as follows:
+The `dynasty` values appear in Chinese and include some variants, e.g. `明` / `明朝`, `清`, and `近现代` / `现代` / `民国`. For the five-period statistics reported in the paper, variants are grouped as follows:
 
 | Period | Samples | Share |
 |---|---|---|
 | Ming (明) | 2,829 | 43.63% |
 | Qing (清) | 2,379 | 36.69% |
 | Modern (近现代 / 现代 / 民国) | 698 | 10.76% |
-| Song (宋 / 南宋) | 436 | 6.72% |
-| Yuan (元 / 金) | 142 | 2.19% |
+| Song (宋) | 436 | 6.72% |
+| Yuan (元) | 142 | 2.19% |
 | **Total** | **6,484** | **100%** |
 
 ## Splits
