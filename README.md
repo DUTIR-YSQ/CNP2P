@@ -8,24 +8,42 @@ The dataset accompanies the paper:
 > Senqi Yang, Dongyu Zhang, Haoxi Yang, Jiaying Liu, Ciyuan Peng, Mingshuo Pan, Wei Guo, Haojia Li, Hongfei Lin, Feng Xia
 > *Expert Systems with Applications* (accepted)
 
-## Complete dataset
+## Data access
 
-The full dataset — all 6,484 images and the canonical annotation files, about **5.14 GB** — is publicly available on Hugging Face:
+The complete dataset — all 6,484 images and the annotation files, about **5.14 GB** — is hosted on Hugging Face:
 
 **<https://huggingface.co/datasets/senqiY/CNP2P>**
 
-## What is in this repository
+Because of GitHub's file-size and storage limits, the data is not mirrored in this repository.
 
-Because GitHub's storage limits make it impractical to host the full image set here, this repository provides a subset:
+### Repository layout on Hugging Face
 
-| Path | Contents |
-|---|---|
-| `train_1_2500/` | 1,941 training images (IDs in the range 1–2500) |
-| `train.json` | Annotations for **all 5,837** training samples |
-| `test/` | All 647 test images |
-| `test.json` | Annotations for all 647 test samples, including `Reference Poetry` |
+```
+CNP2P/
+├── train/
+│   ├── 1.jpg
+│   ├── 5.jpg
+│   └── ...                # 5,837 images
+├── test/
+│   ├── 2.jpg
+│   └── ...                # 647 images
+├── train.json             # 5,837 records
+└── test.json              # 647 records
+```
 
-For the complete training images and the canonical annotation files (standard JSON arrays), use the Hugging Face release linked above.
+### Download
+
+```bash
+huggingface-cli download senqiY/CNP2P --repo-type dataset --local-dir CNP2P
+```
+
+Or in Python:
+
+```python
+from huggingface_hub import snapshot_download
+
+path = snapshot_download("senqiY/CNP2P", repo_type="dataset")
+```
 
 ## Data format
 
@@ -66,15 +84,13 @@ The `dynasty` values appear in Chinese and include some variants, e.g. `宋` / `
 import json
 from pathlib import Path
 
-root = Path("CNP2P")
+from huggingface_hub import snapshot_download
+
+root = Path(snapshot_download("senqiY/CNP2P", repo_type="dataset"))
 records = json.loads((root / "train.json").read_text(encoding="utf-8"))
 sample = records[0]
 
-# GitHub subset
-image_path = root / "train_1_2500" / f"{sample['ID']}.jpg"
-# Full Hugging Face release
-# image_path = root / "train" / f"{sample['ID']}.jpg"
-
+image_path = root / "train" / f"{sample['ID']}.jpg"
 print(image_path)
 print(sample["Title"], sample["dynasty"], sample["author"])
 print(sample["Main elements"])
